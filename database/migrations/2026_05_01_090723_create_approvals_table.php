@@ -6,31 +6,28 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('approval', function (Blueprint $table) {
-            $table->id();
-            $table->string('tipe');          // 'berita' | 'galeri' | 'beranda'
-            $table->unsignedBigInteger('referensi_id'); // id dari tabel berita/galeri
-            $table->string('judul');         // judul konten untuk preview
-            $table->text('preview')->nullable(); // ringkasan konten
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-            $table->unsignedBigInteger('dibuat_oleh')->nullable(); // user_id admin
-            $table->unsignedBigInteger('disetujui_oleh')->nullable(); // user_id pimpinan
-            $table->timestamp('disetujui_at')->nullable();
-            $table->text('catatan')->nullable(); // catatan penolakan
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('approval')) {
+            Schema::create('approval', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('tipe');
+                $table->unsignedBigInteger('referensi_id');
+                $table->string('judul');
+                $table->text('preview')->nullable();
+                $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+                $table->unsignedBigInteger('dibuat_oleh')->nullable();
+                $table->unsignedBigInteger('disetujui_oleh')->nullable();
+                $table->timestamp('disetujui_at')->nullable();
+                $table->text('catatan')->nullable();
+                $table->timestamp('created_at')->nullable();
+                $table->timestamp('updated_at')->nullable();
+            });
+        }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('approvals');
+        Schema::dropIfExists('approval');
     }
 };
