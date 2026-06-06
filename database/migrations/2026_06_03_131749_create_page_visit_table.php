@@ -1,21 +1,26 @@
 <?php
 
-namespace App\Models;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PageVisit extends Model
+return new class extends Migration
 {
-    public $timestamps = false;
+    public function up(): void
+    {
+        if (!Schema::hasTable('page_visits')) {
+            Schema::create('page_visits', function (Blueprint $table) {
+                $table->id();
+                $table->string('url');
+                $table->string('ip_address')->nullable();
+                $table->text('user_agent')->nullable();
+                $table->timestamp('visited_at')->nullable();
+            });
+        }
+    }
 
-    protected $fillable = [
-        'url',
-        'ip_address',
-        'user_agent',
-        'visited_at',
-    ];
-
-    protected $casts = [
-        'visited_at' => 'datetime',
-    ];
-}
+    public function down(): void
+    {
+        Schema::dropIfExists('page_visits');
+    }
+};
