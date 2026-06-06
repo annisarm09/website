@@ -6,24 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::table('berita', function (Blueprint $table) {
-        // Menambahkan kolom status dengan default 'published'
-        $table->string('status')->default('published')->after('isi_berita');
-    });
+        if (Schema::hasTable('berita') && !Schema::hasColumn('berita', 'status')) {
+            Schema::table('berita', function (Blueprint $table) {
+                $table->string('status')->default('published');
+            });
+        }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::table('berita', function (Blueprint $table) {
-            //
-        });
+        if (Schema::hasTable('berita') && Schema::hasColumn('berita', 'status')) {
+            Schema::table('berita', function (Blueprint $table) {
+                $table->dropColumn('status');
+            });
+        }
     }
 };
