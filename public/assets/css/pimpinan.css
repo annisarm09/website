@@ -1,0 +1,201 @@
+/* ── Warna aksen pimpinan: gold sebagai pembeda dari admin ── */
+:root {
+            --hijau-tua:   #6b1a1a;   /* maroon */
+            --hijau-mid:   #8b2d2d;
+            --hijau-muda:  #c8a97a;   /* cream-coklat */
+            --gold:        #d4a017;
+            --putih:       #ffffff;
+            --bg:          #f5ede0;   /* cream */
+            --aksen-hijau: #1a5f3a;  /* hijau tua sedikit */
+}
+
+/* Header override — maroon dominan, aksen gold di border bawah */
+.header {
+    background: linear-gradient(105deg, #6b1a1a 0%, #8b2d2d 65%, #a0491a 100%) !important;
+    border-bottom: 3px solid #d4a017;
+    box-shadow: 0 2px 16px rgba(107,26,26,.30);
+}
+.header-brand { color: #fde8a0 !important; }
+.brand-icon   { background: rgba(212,160,23,.20) !important; color: #f1b827 !important; }
+
+/* Container badge pengguna */
+.user-badge {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    color: #fde8a0;
+    font-size: .9rem;
+    font-weight: 600;
+    padding: 5px 15px 5px 5px;
+    border-radius: 30px;
+}
+
+/* Lingkaran Inisial (Avatar) */
+.user-badge .avatar {
+    width: 38px;
+    height: 38px;
+    background: #c8a97a;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: .9rem;
+    color: #6b1a1a;
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Tombol Keluar */
+.btn-logout {
+    background: rgba(212,160,23,.15) !important;
+    border-color: rgba(212,160,23,.45) !important;
+    color: #fde8a0 !important;
+}
+.btn-logout:hover {
+    background: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: #fff !important;
+}
+
+/* Sidebar nav active & hover — gold */
+.nav-item.active {
+    background: linear-gradient(135deg, #6b1a1a, #8b2d2d) !important;
+    color: #fff !important;
+}
+.nav-item:hover:not(.active) {
+    background: #f0e4d0 !important;
+    color: #6b1a1a !important;
+}
+
+/* Badge status approval */
+.badge-pending  { background:#fff3cd; color:#856404; padding:.4rem .9rem; border-radius:20px; font-size:.82rem; font-weight:600; }
+.badge-approved { background:#d4edda; color:#155724; padding:.4rem .9rem; border-radius:20px; font-size:.82rem; font-weight:600; }
+.badge-rejected { background:#f8d7da; color:#721c24; padding:.4rem .9rem; border-radius:20px; font-size:.82rem; font-weight:600; }
+.badge-kategori { background:#f0e4d0; color:#6b1a1a; padding:.25rem .7rem; border-radius:12px; font-size:.8rem; font-weight:600; }
+
+/* Laporan item */
+.laporan-item {
+    background: #fdf5ea;
+    padding: 1.5rem;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    border-left: 5px solid #c8a97a;
+}
+.laporan-item.rejected { border-left-color: #dc3545; }
+.laporan-item.approved { border-left-color: #28a745; }
+
+/* Modal tolak */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+.modal-overlay.show { display: flex; }
+.modal-box {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 20px 60px rgba(107,26,26,0.20);
+}
+.modal-box h3 { color: #dc3545; margin-bottom: 1rem; }
+.modal-box textarea {
+    width: 100%;
+    border: 1.5px solid #ddc9a8;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: .95rem;
+    font-family: inherit;
+    min-height: 100px;
+    resize: vertical;
+    margin-bottom: 1.5rem;
+    box-sizing: border-box;
+}
+.modal-actions { display: flex; gap: .8rem; justify-content: flex-end; }
+        /* ── Tombol Preview ── */
+        .btn-preview {
+            display:inline-flex;align-items:center;gap:.35rem;
+            background:#f0e4d0;color:#6b1a1a;
+            border:1px solid #d4b898;
+            padding:.3rem .75rem;border-radius:8px;
+            font-size:.82rem;font-weight:600;cursor:pointer;
+            transition:background .15s;text-decoration:none;
+        }
+        .btn-preview:hover { background:#e8d4b8; }
+
+        /* ── Modal Overlay ── */
+        .modal-overlay {
+            display:none;position:fixed;inset:0;
+            background:rgba(0,0,0,.55);z-index:9998;
+            align-items:center;justify-content:center;padding:1rem;
+        }
+        .modal-overlay.show { display:flex; }
+
+        /* ── Modal Box (Preview) ── */
+        .modal-preview {
+            background:#fff;border-radius:16px;
+            width:100%;max-width:800px;max-height:92vh;
+            overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.28);
+            display:flex;flex-direction:column;animation:fadeUp .25s ease;
+        }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+        .modal-preview-header {
+            padding:1.25rem 1.5rem;
+            border-bottom:1px solid #eddec8;
+            display:flex;justify-content:space-between;align-items:center;
+            position:sticky;top:0;background:#fff;z-index:1;
+        }
+        .modal-preview-header h2 { margin:0;font-size:1rem;color:#6b1a1a;display:flex;align-items:center;gap:.5rem; }
+        .modal-close-btn {
+            background:none;border:none;font-size:1.35rem;cursor:pointer;
+            color:#9ca3af;padding:.25rem .5rem;border-radius:6px;line-height:1;
+        }
+        .modal-close-btn:hover { background:#f0e4d0;color:#6b1a1a; }
+
+        .modal-preview-body { padding:1.75rem; flex:1; }
+        .modal-preview-body img {
+            width:100%;max-height:340px;object-fit:cover;
+            border-radius:12px;margin-bottom:1.5rem;
+        }
+        .modal-preview-body h1 {
+            font-size:1.55rem;font-weight:800;color:#6b1a1a;
+            margin:0 0 .75rem;line-height:1.35;
+        }
+        .modal-meta {
+            display:flex;gap:1.25rem;flex-wrap:wrap;
+            font-size:.85rem;color:#6b7280;margin-bottom:1.25rem;
+            padding-bottom:1.25rem;border-bottom:1px solid #eddec8;
+        }
+        .modal-meta span { display:flex;align-items:center;gap:.35rem; }
+        .modal-isi {
+            font-size:.975rem;line-height:1.9;color:#374151;
+            white-space:pre-wrap;text-align:justify;
+        }
+
+        .modal-preview-footer {
+            padding:1rem 1.5rem;border-top:1px solid #eddec8;
+            display:flex;gap:.75rem;justify-content:flex-end;align-items:center;
+            position:sticky;bottom:0;background:#fff;
+        }
+
+        /* ── Modal Tolak ── */
+        .modal-tolak {
+            background:#fff;border-radius:16px;
+            width:100%;max-width:480px;
+            box-shadow:0 24px 64px rgba(0,0,0,.28);
+            padding:2rem;animation:fadeUp .25s ease;
+        }
+        .modal-tolak h3 { margin:0 0 .5rem;color:#dc2626;display:flex;align-items:center;gap:.5rem; }
+        .modal-tolak textarea {
+            width:100%;min-height:110px;padding:.75rem;
+            border:1px solid #ddc9a8;border-radius:8px;
+            font-size:.9rem;resize:vertical;margin-top:.5rem;
+            font-family:inherit;
+        }
+        .modal-tolak textarea:focus { outline:none;border-color:#6b1a1a;box-shadow:0 0 0 3px rgba(107,26,26,.12); }
+        .modal-actions { display:flex;gap:.75rem;justify-content:flex-end;margin-top:1rem; }
